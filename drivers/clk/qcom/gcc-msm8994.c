@@ -56,7 +56,7 @@ static const struct parent_map gcc_xo_gpll0_gpll4_map[] = {
 static const char * const gcc_xo_gpll0_gpll4[] = {
 	"xo",
 	"gpll0",
-	"gpll4_vote",
+	"gpll4",
 };
 
 #define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
@@ -99,27 +99,29 @@ static struct clk_alpha_pll_postdiv gpll0 = {
 	},
 };
 
-static struct clk_pll gpll4 = {
-	.status_reg = 0x1DC0,
-	.status_bit = 30,
-	.clkr.hw.init = &(struct clk_init_data)
-	{
-		.name = "gpll4",
-		.parent_names = (const char *[]) { "xo" },
-		.num_parents = 1,
-		 .ops = &clk_pll_ops,
+static struct clk_alpha_pll gpll4_early = {
+	.offset = 0x1DC0,
+	.clkr = {
+		.enable_reg = 0x1480,
+		.enable_mask = BIT(4),
+		.hw.init = &(struct clk_init_data)
+		{
+			.name = "gpll4_early",
+			.parent_names = (const char *[]) { "xo" },
+			.num_parents = 1,
+			 .ops = &clk_alpha_pll_ops,
+		},
 	},
 };
 
-static struct clk_regmap gpll4_vote = {
-	.enable_reg = 0x1480,
-	.enable_mask = BIT(4),
-	.hw.init = &(struct clk_init_data)
+static struct clk_alpha_pll_postdiv gpll4 = {
+	.offset = 0x1DC0,
+	.clkr.hw.init = &(struct clk_init_data)
 	{
-		.name = "gpll4_vote",
-		.parent_names = (const char *[]) { "gpll4" },
+		.name = "gpll4",
+		.parent_names = (const char *[]) { "gpll4_early" },
 		.num_parents = 1,
-		 .ops = &clk_pll_vote_ops,
+		 .ops = &clk_alpha_pll_postdiv_ops,
 	},
 };
 
@@ -2289,8 +2291,8 @@ static struct clk_branch gcc_usb_hs_system_clk = {
 static struct clk_regmap *gcc_msm8994_clocks[] = {
 	[GPLL0_EARLY] = &gpll0_early.clkr,
 	[GPLL0] = &gpll0.clkr,
+	[GPLL4_EARLY] = &gpll4_early.clkr,
 	[GPLL4] = &gpll4.clkr,
-	[GPLL4_VOTE] = &gpll4_vote,
 	[UFS_AXI_CLK_SRC] = &ufs_axi_clk_src.clkr,
 	[USB30_MASTER_CLK_SRC] = &usb30_master_clk_src.clkr,
 	[BLSP1_QUP1_I2C_APPS_CLK_SRC] = &blsp1_qup1_i2c_apps_clk_src.clkr,

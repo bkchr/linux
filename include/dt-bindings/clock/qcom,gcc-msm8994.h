@@ -17,8 +17,8 @@
 
 #define GPLL0_EARLY				0
 #define GPLL0					1
-#define GPLL4					2
-#define GPLL4_VOTE				3
+#define GPLL4_EARLY				2
+#define GPLL4					3
 #define UFS_AXI_CLK_SRC				4
 #define USB30_MASTER_CLK_SRC			5
 #define BLSP1_QUP1_I2C_APPS_CLK_SRC		6
