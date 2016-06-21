@@ -2287,7 +2287,7 @@ static struct clk_branch gcc_usb_hs_system_clk = {
 };
 
 static struct clk_regmap *gcc_msm8994_clocks[] = {
-	[GPLL0_VOTE] = &gpll0_early.clkr,
+	[GPLL0_EARLY] = &gpll0_early.clkr,
 	[GPLL0] = &gpll0.clkr,
 	[GPLL4] = &gpll4.clkr,
 	[GPLL4_VOTE] = &gpll4_vote,
