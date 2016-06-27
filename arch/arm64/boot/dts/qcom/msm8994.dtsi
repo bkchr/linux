@@ -224,13 +224,6 @@
 		hwlocks = <&tcsr_mutex 3>;
 	};
 
-	clock_rpm: qcom,rpmcc@fc401880 {
-		compatible = "qcom,rpmcc-8994";
-		reg = <0xfc401880 0x4>;
-		reg-names = "cc_base";
-		#clock-cells = <1>;
-	};
-
 	clock_gcc: qcom,gcc@fc400000 {
 		compatible = "qcom,gcc-8994";
 		#clock-cells = <1>;
