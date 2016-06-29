@@ -232,6 +232,34 @@
 		reg = <0xfc400000 0x2000>;
 	};
 
+	usb_otg: usb@f9a55000 {
+		compatible = "qcom,usb-otg-snps";
+		reg = <0xf9a55000 0x400>;
+		interrupts = <GIC_SPI 134 IRQ_TYPE_EDGE_BOTH>,
+			     <GIC_SPI 140 IRQ_TYPE_EDGE_RISING>;
+
+		qcom,vdd-levels = <500000 1000000 1320000>;
+		qcom,phy-init-sequence = <0x63 0x81 0xffffffff>;
+		dr_mode = "peripheral";
+		qcom,otg-control = <1>;
+		qcom,manual-pullup;
+
+		clocks = <&clock_gcc GCC_USB_HS_AHB_CLK>,
+			 <&clock_gcc GCC_USB_HS_SYSTEM_CLK>,
+			 <&clock_gcc GCC_USB2_HS_PHY_SLEEP_CLK>;
+		clock-names = "iface", "core", "sleep";
+
+		status = "disabled";
+	};
+
+	usb_host: ehci@f9a55000 {
+		compatible = "qcom,ehci-host";
+		reg = <0xf9a55000 0x400>;
+		interrupts = <GIC_SPI 134 IRQ_TYPE_NONE>;
+		usb-phy = <&usb_otg>;
+		status = "disabled";
+	};
+
 };
 
 #include "msm8994-pins.dtsi"

@@ -133,6 +133,8 @@
 #define GCC_USB30_MOCK_UTMI_CLK			115
 #define GCC_USB3_PHY_AUX_CLK			116
 #define GCC_USB_HS_SYSTEM_CLK			117
+#define GCC_USB_HS_AHB_CLK			118
+#define GCC_USB2_HS_PHY_SLEEP_CLK		119
 
 /* Indexes for GDSCs */
 #define BIMC_GDSC				0
