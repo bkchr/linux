@@ -22,6 +22,7 @@
 #include <linux/regmap.h>
 
 #include <dt-bindings/clock/qcom,gcc-msm8994.h>
+#include <dt-bindings/reset/qcom,gcc-msm8994.h>
 
 #include "common.h"
 #include "clk-regmap.h"
@@ -2437,6 +2438,18 @@ static struct clk_regmap *gcc_msm8994_clocks[] = {
 	[GCC_USB2_HS_PHY_SLEEP_CLK] = &gcc_usb2_hs_phy_sleep_clk.clkr,
 };
 
+static const struct qcom_reset_map gcc_msm8994_resets[] = {
+	[GCC_USB_30_BCR] = { 0x03c0 },
+	[GCC_USB3_PHY_BCR] = { 0x1400 },
+	[GCC_USB3PHY_PHY_BCR] = { 0x1404 },
+	[GCC_USB_HS_BCR] = { 0x0480 },
+	[GCC_USB2_HS_PHY_ONLY_BCR] = { 0x04b0 },
+	[GCC_USB2_PHY_BCR] = { 0x04b8 },
+	[GCC_PCIE_PHY_0_PHY_BCR] = { 0x1b14 },
+	[GCC_PCIE_PHY_1_PHY_BCR] = { 0x1b94 },
+	[GCC_PCIE_PHY_1_BCR] = { 0x1b98 },
+};
+
 static void msm_gcc_8994v2_fixup(void)
 {
 	ufs_axi_clk_src.freq_tbl = ftbl_ufs_axi_clk_src_v2;
@@ -2467,8 +2480,8 @@ static const struct qcom_cc_desc gcc_msm8994_desc = {
 	.config = &gcc_msm8994_regmap_config,
 	.clks = gcc_msm8994_clocks,
 	.num_clks = ARRAY_SIZE(gcc_msm8994_clocks),
-	.resets = NULL,
-	.num_resets = 0,
+	.resets = gcc_msm8994_resets,
+	.num_resets = ARRAY_SIZE(gcc_msm8994_resets),
 	.gdscs = NULL,
 	.num_gdscs = 0,
 };
