@@ -18,7 +18,7 @@
 	compatible = "qcom,msm8994";
 	// msm-id and pmic-id are required by bootloader for
 	// proper selection of dt blob
-	qcom,msm-id = <207 0x0>;
+	qcom,msm-id = <207 0x20000>;
 	qcom,pmic-id = <0x10009 0x1000A 0x0 0x0>;
 	interrupt-parent = <&intc>;
 
@@ -174,7 +174,7 @@
 		};
 
 		clock_gcc: qcom,gcc@fc400000 {
-			compatible = "qcom,gcc-8994";
+			compatible = "qcom,gcc-msm8994";
 			#clock-cells = <1>;
 			#reset-cells = <1>;
 			#power-domain-cells = <1>;
