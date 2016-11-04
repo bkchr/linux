@@ -16,8 +16,8 @@
 #include "msm8994.dtsi"
 
 / {
-	model = "HUAWEI MSM8994 ANGLER rev-1.01";
-	compatible = "qcom,msm8994";
+	model = "Huawei Nexus 6P";
+	compatible = "huawei,angler", "qcom,msm8994";
 	/* required for bootloader to select correct board */
 	qcom,board-id = <8026 0>;
 
