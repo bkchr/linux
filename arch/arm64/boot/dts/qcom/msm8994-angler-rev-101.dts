@@ -36,5 +36,14 @@
 			pinctrl-0 = <&blsp1_uart2_default>;
 			pinctrl-1 = <&blsp1_uart2_sleep>;
 		};
+
+		usb@f9a55000 {
+			status = "okay";
+		};
+
+		ehci@f9a55000 {
+			status = "okay";
+		};
 	};
+
 };
